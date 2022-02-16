@@ -1,5 +1,6 @@
 print("Hello World")
-print("My name is Nattwut")
+print("My name is Nattawut Kongsutthi")
 print("I have edited this line from github")
 print("It doesn't work")
 print("I have cloned this file from github")
+print("I corredted some details")
