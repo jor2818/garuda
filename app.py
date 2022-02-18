@@ -1,7 +1,10 @@
-print("Hello World")
-print("My name is Nattawut Kongsutthi")
-print("I have edited this line from github")
-print("It doesn't work")
-print("I have cloned this file from github")
-print("I corredted some details")
-print("Change some detail from github")
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return "<h1>Hello World</h1>"
+
+if __name__ == '__main__':
+    app.run(debug=True)
