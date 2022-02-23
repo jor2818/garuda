@@ -4,37 +4,80 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ลงชื่อเข้าใช้</title>
+    <title>LOGIN PAGE</title>
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <link href="https://fonts.googleapis.com/css2?family=Prompt&family=Sarabun:wght@200&display=swap" rel="stylesheet">
     <style>
+        * {
+            padding: 0;
+            margin:0;
+            box-sizing: border-box;
+        }
         body { 
-            font-family: 'Prompt', sans-serif;    
+            font-family: 'Prompt', sans-serif;
+            background: rgb(219,226,226)   
             }
+        .row {
+            background: white;
+            border-radius: 30px;
+            box-shadow: 12px 12px 22px grey; 
+        }
+        .img {
+            border-top-left-radius: 30px;
+            border-bottom-left-radius: 30px;
+        }
+        .btn1{
+            border:none;
+            outline:none;
+            height: 50px;
+            width: 100%;
+            background-color:black;
+            color:white;
+            border-radius:4px;
+            font-weight:bold;
+        }
+        .btn1:hover{
+            background: white;
+            border: 1px solid;
+            color: black;
+        }
     </style>
 </head>
 <body>
-    <div class = "header">
-        <h2>ลงชื่อเข้าใช้</h2>
-    </div>
 
-    <form action="">
-        <div class="input-group">
-            <label for="username">Username</label>
-            <input type="text" name="username">
+    <section class="Form my-4 mx-5">
+        <div class="container">
+            <div class="row no-gutters">
+                <div class="col-lg-5">
+                    <img src="/static/image/questionair002.jpg" class="img-fluid" alt="">
+                </div>
+                <div class="col-lg-7 px-5 pt-5">
+                    <h1 class="font-weight-bold py-3">GARADA</h1>
+                    <h4>Sign into your account</h4>
+                    <form action="">
+                        <div class="form-row">
+                            <div class="col-lg-7">
+                                <label for="username">Username</label>
+                                <input type="text" placeholder="username" name="username" class="form-control my-3 p-4">
+                            </div>
+                            <div class="col-lg-7">
+                                <label for="password">Password</label>
+                                <input type="password" placeholder="********" name="password" class="form-control my-3 p-4">
+                            </div>
+                            <div class="col-lg-7">
+                                <button type="submit" name="login_user" class="btn1 mt-3 mb-5">Log In</button>
+                            </div>
+                            <p>Don't have an account? <a href="signout.html">Register here</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="input-group">
-            <label for="password">Password</label>
-            <input type="password" name="password">
-        </div>
-        <div class="input-group">
-            <button type="submit" name="login_user" class="btn"></button>
-        </div>
-        <p>ยังไม่ได้ลงทะเบียนใช่ไหม? <a href="signout.html">ลงทะเบียนเข้าใช้</a></p>
-    </form>
 
+
+    </section>
 
     <script src="/static/js/bootstrap.min.js"></script>
 </body>
