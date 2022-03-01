@@ -9,30 +9,51 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <link href="https://fonts.googleapis.com/css2?family=Prompt&family=Sarabun:wght@200&display=swap" rel="stylesheet">
     <style>
+        * {
+            padding: 0;
+            margin:0;
+            box-sizing: border-box;
+        }
         body { 
-            font-family: 'Prompt', sans-serif;    
+            font-family: 'Prompt', sans-serif;
+            background: rgb(219,226,226)   
             }
-        h2 { 
-            font-family: 'sarabun', sans-serif; 
-            }
+
+        .hero {
+            background-image: url(../static/image/questionair001.jpg);
+            width: auto;
+            height:100vh;
+            background-size: cover;
+            padding-top: 8vh;
+            padding-bottom: 8vh;
+        }
+        .btn:hover{
+            background: white;
+            border: 1px solid;
+            color: black;
+        }
     </style>
 </head>
 <body>
-    <h1>สวัสดี คุณณัฐวุธ กองสุทธิ</h1>
-    <h2>สวัสดีทุกคนครับ</h2>
-    <button type="button" class="btn btn-primary">Primary</button>
-    <button type="button" class="btn btn-secondary">Secondary</button>
-    <button type="button" class="btn btn-success">Success</button>
-    <button type="button" class="btn btn-danger">Danger</button>
-    <button type="button" class="btn btn-warning">Warning</button>
-    <button type="button" class="btn btn-info">Info</button>
-    <button type="button" class="btn btn-light">Light</button>
-    <button type="button" class="btn btn-dark">Dark</button>
+    <section class="hero">
+        <div class="container">
+            <h1 class="font-weight-bold py-3">ROADSIDE INTERVIEW SURVEY</h1>
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="my-3">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque soluta modi nulla laborum nisi eos ab id. Perferendis, quae vero?</p>
+                        <a href="signin.html" class="btn btn-dark btn-lg">SIGN IN</a>
+                    </div>
+                    <div class="my-3">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, ducimus.</p>
+                        <a href="signup.html" class="btn btn-dark btn-lg">SIGN UP</a>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
 
-    <div class="mb-3 mt-3">
-        <label for="formFile" class="form-label">เลือกไฟล์นำเข้าข้อมูล</label>
-        <input class="form-control" type="file" id="formFile">
-    </div>
+    </section>
 
     <script src="/static/js/bootstrap.min.js"></script>
 </body>
