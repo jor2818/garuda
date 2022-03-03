@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEMBER DASHBOARD</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Prompt&family=Sarabun:wght@200&display=swap" rel="stylesheet">
+    <style>
+        * {
+            padding: 0;
+            margin:0;
+            box-sizing: border-box;
+        }
+        body { 
+            font-family: 'Prompt', sans-serif;
+            background: rgb(219,226,226)   
+            }
+        .row {
+            background: white;
+            border-radius: 30px;
+            box-shadow: 12px 12px 22px grey; 
+        }
+        .btn1{
+            border:none;
+            outline:none;
+            height: 50px;
+            width: 100%;
+            background-color:black;
+            color:white;
+            border-radius:4px;
+            font-weight:bold;
+        }
+        .btn1:hover{
+            background: white;
+            border: 1px solid;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="contain">
+        <div class="header p-3">
+            <h1 class="text-center">{{headername}}</h1>
+        </div>
+        <div>
+            <table class="table table-striped">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">ชื่อ</th>
+                    <th scope="col">นามสกุล</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">email</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {%for row in rows%}
+                        <tr>
+                            <td>{{row['mem_id']}}</td>
+                            <td>{{row['mem_fname']}}</td>
+                            <td>{{row['mem_lname']}}</td>
+                            <td>{{row['mem_username']}}</td>
+                            <td>{{row['mem_email']}}</td>                    
+                        </tr>
+                    {%endfor%}
+                  
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+
+    
+
+
+    <script src="/static/js/bootstrap.min.js"></script>
+</body>
+</html>
