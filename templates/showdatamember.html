@@ -65,8 +65,50 @@
                             <td>{{row['mem_fname']}}</td>
                             <td>{{row['mem_lname']}}</td>
                             <td>{{row['mem_username']}}</td>
-                            <td>{{row['mem_email']}}</td>                    
+                            <td>{{row['mem_email']}}</td>
+                            <td>
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal{{row['mem_id']}}">EDIT</button>
+                                <button type="button" class="btn btn-danger">DELETE</button>
+                            </td>                    
                         </tr>
+                        <div class="modal fade" id="exampleModal{{row['mem_id']}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Edit Member Data</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <form action="{{url_for('member.Editmember')}}" method="post">
+                                    <div class="mb-3">
+                                      <input type="hidden" class="form-control" value="{{row['mem_id']}}" name="id">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="recipient-name" class="col-form-label">Name:</label>
+                                        <input type="text" class="form-control" value="{{row['mem_fname']}}" name="fname">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="recipient-name" class="col-form-label">Last Name:</label>
+                                        <input type="text" class="form-control" value="{{row['mem_lname']}}" name="lname">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="recipient-name" class="col-form-label">Username:</label>
+                                        <input type="text" class="form-control" value="{{row['mem_username']}}" name="username">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="recipient-name" class="col-form-label">Email:</label>
+                                        <input type="email" class="form-control" value="{{row['mem_email']}}" name="email">
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Update Data</button>
+                                    </div>
+                                  </form>
+                                </div>
+                                
+                              </div>
+                            </div>
+                          </div>
                     {%endfor%}
                   
                 </tbody>
