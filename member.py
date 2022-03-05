@@ -2,7 +2,7 @@ from flask import Blueprint,render_template,request,redirect,url_for
 import pymysql
 
 
-con = pymysql.connect(host='localhost',port=3306,user='root',password='',db='garudadb',cursorclass=pymysql.cursors.DictCursor)
+con = pymysql.connect("127.0.0.1","root","","garudadb")
 member = Blueprint('member', __name__)
 
 

@@ -42,7 +42,7 @@
     </style>
 </head>
 <body>
-    <div class="contain">
+    <div class="container">
         <div class="header p-3">
             <h1 class="text-center">{{headername}}</h1>
         </div>
@@ -61,17 +61,17 @@
                 <tbody>
                     {%for row in rows%}
                         <tr>
-                            <td>{{row['mem_id']}}</td>
-                            <td>{{row['mem_fname']}}</td>
-                            <td>{{row['mem_lname']}}</td>
-                            <td>{{row['mem_username']}}</td>
-                            <td>{{row['mem_email']}}</td>
+                            <td>{{ row.0 }}</td>
+                            <td>{{ row.1 }}</td>
+                            <td>{{ row.2 }}</td>
+                            <td>{{ row.3 }}</td>
+                            <td>{{ row.4 }}</td>
                             <td>
-                                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal{{row['mem_id']}}">EDIT</button>
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal{{ row.0 }}">EDIT</button>
                                 <button type="button" class="btn btn-danger">DELETE</button>
                             </td>                    
                         </tr>
-                        <div class="modal fade" id="exampleModal{{row['mem_id']}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="exampleModal{{ row.0 }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                               <div class="modal-content">
                                 <div class="modal-header">
@@ -81,23 +81,23 @@
                                 <div class="modal-body">
                                   <form action="{{url_for('member.Editmember')}}" method="post">
                                     <div class="mb-3">
-                                      <input type="hidden" class="form-control" value="{{row['mem_id']}}" name="id">
+                                      <input type="hidden" class="form-control" value="{{ row.0 }}" name="id">
                                     </div>
                                     <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Name:</label>
-                                        <input type="text" class="form-control" value="{{row['mem_fname']}}" name="fname">
+                                        <input type="text" class="form-control" value="{{ row.1 }}" name="fname">
                                     </div>
                                     <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Last Name:</label>
-                                        <input type="text" class="form-control" value="{{row['mem_lname']}}" name="lname">
+                                        <input type="text" class="form-control" value="{{ row.2 }}" name="lname">
                                     </div>
                                     <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Username:</label>
-                                        <input type="text" class="form-control" value="{{row['mem_username']}}" name="username">
+                                        <input type="text" class="form-control" value="{{ row.3 }}" name="username">
                                     </div>
                                     <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Email:</label>
-                                        <input type="email" class="form-control" value="{{row['mem_email']}}" name="email">
+                                        <input type="email" class="form-control" value="{{ row.4 }}" name="email">
                                     </div>
                                     <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
