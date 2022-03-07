@@ -26,13 +26,29 @@ def Editmember():
         lname = request.form['lname']
         username = request.form['username']
         email = request.form['email']
+        status = request.form['status']
+        print(status)
         
         with con:
             cur = con.cursor()
-            sql = "UPDATE tb_member SET mem_fname=%s, mem_lname=%s, mem_username=%s, mem_email=%s WHERE mem_id=%s"
-            cur.execute(sql,(fname,lname,username,email,id))
+            sql = "UPDATE tb_member SET mem_fname=%s, mem_lname=%s, mem_username=%s, mem_email=%s, mem_status=%s WHERE mem_id=%s"
+            cur.execute(sql,(fname,lname,username,email,status,id))
             con.commit()
             return redirect(url_for('member.Showdatamember'))
         
+
+@member.route('/delmember', methods=['POST'])   
+def Delmember():
+    if request.method == 'POST':
         
-        
+        id = request.form['id']
+
+        with con:
+            cur = con.cursor()
+            sql = "DELETE FROM tb_member WHERE mem_id=%s"
+            cur.execute(sql, id)
+            con.commit()
+            return redirect(url_for('member.Showdatamember'))
+
+
+    
