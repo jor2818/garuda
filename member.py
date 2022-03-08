@@ -51,4 +51,24 @@ def Delmember():
             return redirect(url_for('member.Showdatamember'))
 
 
+@member.route('/signup')
+def Signup():
+    return render_template('signup.html')
+
+@member.route('/addmember', methods=['POST'])
+def Addmember():
     
+    if request.method == 'POST':
+        
+        fname = request.form['fname']
+        lname = request.form['lname']
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password_1']
+        
+        with con:
+            cur = con.cursor()
+            sql = "INSERT INTO tb_member (mem_fname, mem_lname, mem_username, mem_email, mem_password) VALUES (%s, %s, %s, %s, %s)"
+            cur.execute(sql,(fname,lname,username,email,password))
+            con.commit()
+            return redirect(url_for('user.Signin'))
