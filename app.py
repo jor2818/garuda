@@ -1,11 +1,14 @@
 from flask import Flask, render_template
 from member import *
-from user import *
+from datetime import timedelta
+
 
 
 app = Flask(__name__)
 app.register_blueprint(member)
-app.register_blueprint(user)
+app.secret_key = "jor2818"
+app.permanent_session_lifetime = timedelta(minutes=30)
+
 
 
 @app.route('/')
