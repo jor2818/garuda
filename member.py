@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session
+from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 import pymysql
 
 
@@ -78,6 +78,7 @@ def Addmember():
                 con.commit()
                 return redirect(url_for('member.Signin'))
         else:
+            flash("Password are not matched.Try again!!!")
             return redirect(url_for('member.Signup'))
 
 @member.route('/signin')
@@ -106,12 +107,20 @@ def Checklogin():
                 if rows[0][6] == 0:
                     session['username'] = username
                     session['fname'] = rows[0][1]
+                    session['status'] = rows[0][6]
                     session.permanent = True
                     return redirect(url_for('member.Surveyform'))
                 else:
                     session['username'] = username
                     session['fname'] = rows[0][1]
+                    session['status'] = rows[0][6]
                     session.permanent = True
                     return redirect(url_for('member.Showdatamember'))
             else:
-                return redirect(url_for('member.login'))
+                flash("You are not logged in. Please Check your username and password.")
+                return render_template('signin.html')
+            
+@member.route('/signoff')
+def Signoff():
+    session.clear()
+    return redirect(url_for('member.Signin'))

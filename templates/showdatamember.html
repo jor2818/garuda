@@ -47,6 +47,11 @@
             <h1 class="text-center">{{headername}}</h1>
         </div>
         <div>
+            <h4 align="right">Welcome Khun {{ session['fname'] }}</h4>
+            <h5 align="right"> <a href="{{url_for('member.Signoff')}}">SIGN OFF</a></h5>
+            <h5 align="right"> <a href="{{url_for('member.Surveyform')}}">GO TO SURVEY FORM</a> </h5>
+        </div>
+        <div>
             <table class="table table-striped">
                 <thead class="table-dark">
                   <tr>
