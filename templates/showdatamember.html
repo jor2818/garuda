@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MEMBER DASHBOARD</title>
+    <title>MEMBER DATA DASHBOARD</title>
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
@@ -50,6 +50,7 @@
             <h4 align="right">Welcome Khun {{ session['fname'] }}</h4>
             <h5 align="right"> <a href="{{url_for('member.Signoff')}}">SIGN OFF</a></h5>
             <h5 align="right"> <a href="{{url_for('member.Surveyform')}}">GO TO SURVEY FORM</a> </h5>
+            <h5 align="right"> <a href="{{url_for('survey.Showdatasurvey')}}">GO TO SURVEY DATA</a></h5>
         </div>
         <div>
             <table class="table table-striped">

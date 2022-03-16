@@ -57,7 +57,7 @@
                     <div>
                       <h4 align="right">Welcome Khun {{ session['fname'] }}</h4>
                       <h5 align="right"> <a href="{{url_for('member.Signoff')}}">SIGN OFF</a></h5>
-                      <h5 align="right"> <a href="#">GO TO SURVEY DATA</a></h5>
+                      <h5 align="right"> <a href="{{url_for('survey.Showdatasurvey')}}">GO TO SURVEY DATA</a></h5>
 
                       {% if session['status'] == 1 %}
                       
@@ -67,121 +67,110 @@
                       
                     </div>
                     <div class="panel panel-body">
-                        <form action="#">
+                        <form action="#", method="POST">
                             <div class="col-lg-12">
                                 <label for="projectname">Project Name</label>
-                                <input type="text" placeholder="project name" name="projectname" class="form-control my-2 p-3">
+                                <input type="text" placeholder="project name" name="projname" class="form-control my-2 p-3">
                             </div>
                             <div class="col-lg-12">
                                 <label for="roadname">Road Name/Number</label>
-                                <input type="text" placeholder="road name" name="roadname" class="form-control my-2 p-3">
+                                <input type="text" placeholder="road name" name="rname" class="form-control my-2 p-3">
                             </div>
                             <div class="col-lg-12">
                                 <label for="staname">Station Name</label>
-                                <input type="text" placeholder="station name" name="staname" class="form-control my-2 p-3">
+                                <input type="text" placeholder="station name" name="stname" class="form-control my-2 p-3">
                             </div>
                             <div class="col-lg-12">
                                 <label for="date">Date</label>
-                                <div class="col-5">
-                                    <div class="input-group date" id="datepicker">
-                                      <input type="text" class="form-control" id="date"/>
-                                      <span class="input-group-append">
-                                        <span class="input-group-text bg-light d-block">
-                                          <i class="fa fa-calendar"></i>
-                                        </span>
-                                      </span>
-                                    </div>
-                                  </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <label for="surveyname">Surveyer Name</label>
-                                <input type="text" placeholder="Surveyer name" name="surveyname" class="form-control my-2 p-3">
+                                <input type="date" placeholder="date" name="date" class="form-control my-2 p-3">
                             </div>
                             <div class="col-lg-12">
                                 <label for="weather">Weather</label>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="Radios_w" id="exampleRadios1" value="sunny" checked>
-                                    <label class="form-check-label" for="exampleRadios1">
+                                    <input class="form-check-input" type="radio" name="weather" value="sunny" checked>
+                                    <label class="form-check-label">
                                       Sunny
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="Radios_w" id="exampleRadios2" value="cloudy">
-                                    <label class="form-check-label" for="exampleRadios2">
+                                    <input class="form-check-input" type="radio" name="weather" value="cloudy">
+                                    <label class="form-check-label">
                                       Cloudy
                                     </label>
                                 </div>
-                                <div class="form-check disabled">
-                                    <input class="form-check-input" type="radio" name="Radios_w" id="exampleRadios3" value="bright">
-                                    <label class="form-check-label" for="exampleRadios3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="weather" value="bright">
+                                    <label class="form-check-label">
                                       Bright
                                     </label>
                                 </div>
-                                <div class="form-check disabled">
-                                    <input class="form-check-input" type="radio" name="Radios_w" id="exampleRadios4" value="gloomy">
-                                    <label class="form-check-label" for="exampleRadios4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="weather" value="gloomy">
+                                    <label class="form-check-label">
                                       Gloomy
                                     </label>
                                 </div>
-                                <div class="form-check disabled">
-                                    <input class="form-check-input" type="radio" name="Radios_w" id="exampleRadios5" value="haze">
-                                    <label class="form-check-label" for="exampleRadios5">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="weather" value="haze">
+                                    <label class="form-check-label">
                                       Haze
                                     </label>
                                 </div>
-                                <div class="form-check disabled">
-                                    <input class="form-check-input" type="radio" name="Radios_w" id="exampleRadios6" value="damp">
-                                    <label class="form-check-label" for="exampleRadios6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="weather" value="damp">
+                                    <label class="form-check-label">
                                       Damp/Drizzle
                                     </label>
                                 </div>
-                                <div class="form-check disabled">
-                                    <input class="form-check-input" type="radio" name="Radios_w" id="exampleRadios7" value="rain">
-                                    <label class="form-check-label" for="exampleRadios7">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="weather" value="rain">
+                                    <label class="form-check-label">
                                       Rain
                                     </label>
                                 </div>
-                                <div class="form-check disabled">
-                                    <input class="form-check-input" type="radio" name="Radios_w" id="exampleRadios8" value="pour">
-                                    <label class="form-check-label" for="exampleRadios8">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="weather" value="pour">
+                                    <label class="form-check-label">
                                       Pour
                                     </label>
                                 </div>
-                                <div class="form-check disabled">
-                                    <input class="form-check-input" type="radio" name="Radios_w" id="exampleRadios9" value="other">
-                                    <label class="form-check-label" for="Radios9">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="weather" value="other">
+                                    <label class="form-check-label">
                                       Other
                                     </label>
                                 </div>
                             </div>
                             <div class="col-lg-12">
-                                <label for="interviewNo">Interview No.</label>
-                                <input type="text" class="form-control my-2 p-3">
-                            </div>
-                            <div class="col-lg-12">
                                 <label for="trippropose">Trip Propose</label>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="Radios_tp" id="tripPro1" value="work" checked>
-                                    <label class="form-check-label" for="exampleRadios1">
+                                    <input class="form-check-input" type="radio" name="trippurpose" value="work" checked>
+                                    <label class="form-check-label">
                                       Work
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="Radios_tp" id="tripPro2" value="study">
-                                    <label class="form-check-label" for="exampleRadios2">
+                                    <input class="form-check-input" type="radio" name="trippurpose" value="study">
+                                    <label class="form-check-label">
                                       Study
                                     </label>
                                 </div>
-                                <div class="form-check disabled">
-                                    <input class="form-check-input" type="radio" name="Radios_tp" id="tripPro3" value="travel">
-                                    <label class="form-check-label" for="exampleRadios3">
-                                      Travel
+                                <div class="form-check">
+                                  <input class="form-check-input" type="radio" name="trippurpose" value="shopping">
+                                  <label class="form-check-label">
+                                    Shopping
+                                  </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="trippurpose" value="recration">
+                                    <label class="form-check-label">
+                                      Recration
                                     </label>
                                 </div>
-                                <div class="form-check disabled">
-                                    <input class="form-check-input" type="radio" name="Radios_tp" id="tripPro4" value="other">
-                                    <label class="form-check-label" for="exampleRadios4">
-                                      other
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="trippurpose" value="other">
+                                    <label class="form-check-label">
+                                      Other
                                     </label>
                                 </div>
                             </div>
@@ -189,32 +178,38 @@
                             <div class="col-lg-12">
                                 <label for="origin">Origin Place</label>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="Radios_op" id="origin1" value="home" checked>
-                                    <label class="form-check-label" for="exampleRadios1">
+                                    <input class="form-check-input" type="radio" name="orgplc" value="home" checked>
+                                    <label class="form-check-label">
                                       Home
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="Radios_op" id="origin2" value="study">
-                                    <label class="form-check-label" for="exampleRadios2">
-                                      Work Place
-                                    </label>
-                                </div>
-                                <div class="form-check disabled">
-                                    <input class="form-check-input" type="radio" name="Radios_op" id="origin3" value="travel">
-                                    <label class="form-check-label" for="exampleRadios3">
+                                  <input class="form-check-input" type="radio" name="orgplc" value="workplace">
+                                  <label class="form-check-label">
+                                    Work Place
+                                  </label>
+                              </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="orgplc" value="school">
+                                    <label class="form-check-label">
                                       School/University
                                     </label>
                                 </div>
-                                <div class="form-check disabled">
-                                    <input class="form-check-input" type="radio" name="Radios_op" id="origin4" value="other">
-                                    <label class="form-check-label" for="exampleRadios4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="orgplc" value="market">
+                                    <label class="form-check-label">
+                                      Market Place/Department Store
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="orgplc" value="recration">
+                                    <label class="form-check-label">
                                       Tourist Attrction
                                     </label>
                                 </div>
-                                <div class="form-check disabled">
-                                    <input class="form-check-input" type="radio" name="Radios_op" id="origin5" value="other">
-                                    <label class="form-check-label" for="exampleRadios5">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="orgplc" value="other">
+                                    <label class="form-check-label">
                                       Other
                                     </label>
                                 </div>
@@ -222,43 +217,49 @@
 
                             <div class="col-lg-12">
                                 <label for="originmark">Origin Place Name (Landmark)</label>
-                                <input type="text" placeholder="Origin Place name" name="originmark" class="form-control my-2 p-3">
+                                <input type="text" placeholder="Origin Place name" name="orgplcname" class="form-control my-2 p-3">
                             </div>
 
                             <div class="col-lg-12">
                                 <label for="orginZone">Zone No.</label>
-                                <input type="text" placeholder="Zone no." name="originZone" class="form-control my-2 p-3">
+                                <input type="text" placeholder="Zone no." name="orgzone" class="form-control my-2 p-3">
                             </div>
 
                             <div class="col-lg-12">
                                 <label for="origin">Desination Place</label>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="Radios_dp" id="origin1" value="home" checked>
-                                    <label class="form-check-label" for="exampleRadios1">
+                                    <input class="form-check-input" type="radio" name="destplc" value="home" checked>
+                                    <label class="form-check-label">
                                       Home
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="Radios_dp" id="origin2" value="study">
-                                    <label class="form-check-label" for="exampleRadios2">
+                                    <input class="form-check-input" type="radio" name="destplc" value="workplace">
+                                    <label class="form-check-label">
                                       Work Place
                                     </label>
                                 </div>
-                                <div class="form-check disabled">
-                                    <input class="form-check-input" type="radio" name="Radios_dp" id="origin3" value="travel">
-                                    <label class="form-check-label" for="exampleRadios3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="destplc" value="school">
+                                    <label class="form-check-label">
                                       School/University
                                     </label>
                                 </div>
-                                <div class="form-check disabled">
-                                    <input class="form-check-input" type="radio" name="Radios_dp" id="origin4" value="other">
-                                    <label class="form-check-label" for="exampleRadios4">
+                                <div class="form-check">
+                                  <input class="form-check-input" type="radio" name="destplc" value="market">
+                                  <label class="form-check-label">
+                                    Market Place/Department Store
+                                  </label>
+                              </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="destplc" value="recration">
+                                    <label class="form-check-label">
                                       Tourist Attrction
                                     </label>
                                 </div>
-                                <div class="form-check disabled">
-                                    <input class="form-check-input" type="radio" name="Radios_dp" id="origin5" value="other">
-                                    <label class="form-check-label" for="exampleRadios5">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="destplc" value="other">
+                                    <label class="form-check-label">
                                       Other
                                     </label>
                                 </div>
@@ -266,67 +267,69 @@
 
                             <div class="col-lg-12">
                                 <label for="destmark">Destination Place Name (Landmark)</label>
-                                <input type="text" placeholder="Destination Place name" name="destmark" class="form-control my-2 p-3">
+                                <input type="text" placeholder="Destination Place name" name="destplcname" class="form-control my-2 p-3">
                             </div>
 
                             <div class="col-lg-12">
                                 <label for="destZone">Zone No.</label>
-                                <input type="text" placeholder="Zone no." name="destZone" class="form-control my-2 p-3">
+                                <input type="text" placeholder="Zone no." name="destzone" class="form-control my-2 p-3">
                             </div>
 
                             <div class="col-lg-12">
                                 <label for="vehicle">Type of Vehicle</label>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="Radios_v" id="origin1" value="MC" checked>
-                                    <label class="form-check-label" for="exampleRadios1">
-                                      motorcycle
+                                    <input class="form-check-input" type="radio" name="vehtype" value="MC" checked>
+                                    <label class="form-check-label">
+                                      Motorcycle
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="Radios_v" id="origin2" value="PC">
-                                    <label class="form-check-label" for="exampleRadios2">
+                                    <input class="form-check-input" type="radio" name="vehtype" value="PC">
+                                    <label class="form-check-label">
                                       Car/Pickup/SUV/Van
                                     </label>
                                 </div>
                                 <div class="form-check disabled">
-                                    <input class="form-check-input" type="radio" name="Radios_v" id="origin3" value="ST">
-                                    <label class="form-check-label" for="exampleRadios3">
-                                      Small Truck
-                                    </label>
+                                  <input class="form-check-input" type="radio" name="vehtype" value="SB">
+                                  <label class="form-check-label">
+                                    Small Bus
+                                  </label>
                                 </div>
                                 <div class="form-check disabled">
-                                    <input class="form-check-input" type="radio" name="Radios_v" id="origin4" value="MT">
-                                    <label class="form-check-label" for="exampleRadios4">
-                                      Medium Truck
-                                    </label>
-                                </div>
-                                <div class="form-check disabled">
-                                    <input class="form-check-input" type="radio" name="Radios_v" id="origin5" value="HT">
-                                    <label class="form-check-label" for="exampleRadios5">
-                                      Heavy Truck
-                                    </label>
-                                </div>
-                                <div class="form-check disabled">
-                                    <input class="form-check-input" type="radio" name="Radios_v" id="origin6" value="SB">
-                                    <label class="form-check-label" for="exampleRadios5">
-                                      Small Bus
-                                    </label>
-                                </div>
-                                <div class="form-check disabled">
-                                    <input class="form-check-input" type="radio" name="Radios_v" id="origin7" value="MB">
-                                    <label class="form-check-label" for="exampleRadios5">
+                                    <input class="form-check-input" type="radio" name="vehtype" value="MB">
+                                    <label class="form-check-label">
                                       Medium Bus
                                     </label>
                                 </div>
                                 <div class="form-check disabled">
-                                    <input class="form-check-input" type="radio" name="Radios_v" id="origin8" value="HB">
-                                    <label class="form-check-label" for="exampleRadios5">
+                                    <input class="form-check-input" type="radio" name="vehtype" value="HB">
+                                    <label class="form-check-label">
                                       Heavy Bus
                                     </label>
                                 </div>
+
                                 <div class="form-check disabled">
-                                    <input class="form-check-input" type="radio" name="Radios_v" id="origin5" value="other">
-                                    <label class="form-check-label" for="exampleRadios5">
+                                    <input class="form-check-input" type="radio" name="vehtype" value="ST">
+                                    <label class="form-check-label">
+                                      Small Truck
+                                    </label>
+                                </div>
+                                <div class="form-check disabled">
+                                    <input class="form-check-input" type="radio" name="vehtype" value="MT">
+                                    <label class="form-check-label">
+                                      Medium Truck
+                                    </label>
+                                </div>
+                                <div class="form-check disabled">
+                                    <input class="form-check-input" type="radio" name="vehtype" value="HT">
+                                    <label class="form-check-label">
+                                      Heavy Truck
+                                    </label>
+                                </div>
+                               
+                                <div class="form-check disabled">
+                                    <input class="form-check-input" type="radio" name="vehtype" value="other">
+                                    <label class="form-check-label">
                                       Other
                                     </label>
                                 </div>
@@ -334,7 +337,7 @@
 
                             <div class="col-lg-12">
                                 <label for="passenger">Number of passengers (include driver)</label>
-                                <input type="text" placeholder="number of passenger" name="passenger" class="form-control my-2 p-3">
+                                <input type="text" placeholder="number of passenger" name="nbpass" class="form-control my-2 p-3">
                             </div>
 
                             <div class="col-lg-12">
@@ -354,10 +357,6 @@
 
 
     <script src="/static/js/bootstrap.min.js"></script>
-    <script>
-        $(function(){
-            $('#datepicker').datepicker();
-          });
-    </script>
+
 </body>
 </html>
