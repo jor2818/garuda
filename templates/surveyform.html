@@ -54,6 +54,22 @@
                     <div class="panel-heading">
                         <h1 class="font-weight-bold py-3 text-center">ROADSIDE INTERVIEW SURVEY FORM</h1>
                     </div>
+
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for msg in messages %}
+                                <div class="alert alert-success" role="alert">
+                                    
+                                    {{ msg }}
+
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
+
                     <div>
                       <h4 align="right">Welcome Khun {{ session['fname'] }}</h4>
                       <h5 align="right"> <a href="{{url_for('member.Signoff')}}">SIGN OFF</a></h5>
@@ -67,22 +83,22 @@
                       
                     </div>
                     <div class="panel panel-body">
-                        <form action="#", method="POST">
+                        <form action="{{ url_for('survey.Addsurvey') }}" method="post">
                             <div class="col-lg-12">
                                 <label for="projectname">Project Name</label>
-                                <input type="text" placeholder="project name" name="projname" class="form-control my-2 p-3">
+                                <input type="text" placeholder="project name" name="projname" class="form-control my-2 p-3" required>
                             </div>
                             <div class="col-lg-12">
                                 <label for="roadname">Road Name/Number</label>
-                                <input type="text" placeholder="road name" name="rname" class="form-control my-2 p-3">
+                                <input type="text" placeholder="road name" name="rname" class="form-control my-2 p-3" required>
                             </div>
                             <div class="col-lg-12">
                                 <label for="staname">Station Name</label>
-                                <input type="text" placeholder="station name" name="stname" class="form-control my-2 p-3">
+                                <input type="text" placeholder="station name" name="stname" class="form-control my-2 p-3" required>
                             </div>
                             <div class="col-lg-12">
                                 <label for="date">Date</label>
-                                <input type="date" placeholder="date" name="date" class="form-control my-2 p-3">
+                                <input type="date" placeholder="date" name="date" class="form-control my-2 p-3" required>
                             </div>
                             <div class="col-lg-12">
                                 <label for="weather">Weather</label>
@@ -217,12 +233,12 @@
 
                             <div class="col-lg-12">
                                 <label for="originmark">Origin Place Name (Landmark)</label>
-                                <input type="text" placeholder="Origin Place name" name="orgplcname" class="form-control my-2 p-3">
+                                <input type="text" placeholder="Origin Place name" name="orgplcname" class="form-control my-2 p-3" required>
                             </div>
 
                             <div class="col-lg-12">
                                 <label for="orginZone">Zone No.</label>
-                                <input type="text" placeholder="Zone no." name="orgzone" class="form-control my-2 p-3">
+                                <input type="text" placeholder="Zone no." name="orgzone" class="form-control my-2 p-3" required>
                             </div>
 
                             <div class="col-lg-12">
@@ -267,12 +283,12 @@
 
                             <div class="col-lg-12">
                                 <label for="destmark">Destination Place Name (Landmark)</label>
-                                <input type="text" placeholder="Destination Place name" name="destplcname" class="form-control my-2 p-3">
+                                <input type="text" placeholder="Destination Place name" name="destplcname" class="form-control my-2 p-3" required>
                             </div>
 
                             <div class="col-lg-12">
                                 <label for="destZone">Zone No.</label>
-                                <input type="text" placeholder="Zone no." name="destzone" class="form-control my-2 p-3">
+                                <input type="text" placeholder="Zone no." name="destzone" class="form-control my-2 p-3" required>
                             </div>
 
                             <div class="col-lg-12">
@@ -337,7 +353,7 @@
 
                             <div class="col-lg-12">
                                 <label for="passenger">Number of passengers (include driver)</label>
-                                <input type="text" placeholder="number of passenger" name="nbpass" class="form-control my-2 p-3">
+                                <input type="text" placeholder="number of passenger" name="nbpass" class="form-control my-2 p-3" required>
                             </div>
 
                             <div class="col-lg-12">

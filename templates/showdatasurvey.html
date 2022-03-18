@@ -64,7 +64,7 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">ชื่อโครงการ</th>
-                    <th scope="col">ชื่อถนนน</th>
+                    <th scope="col">ชื่อถนน</th>
                     <th scope="col">ชื่อสถานีสำรวจ</th>
                     <th scope="col">วันสำรวจ</th>
                     <th scope="col">ผู้สำรวจ</th>
@@ -106,8 +106,37 @@
                             </td>                    
                         </tr>
 
-                        
+                        <!-- Modal Delete-->
+                        <div class="modal fade" id="exampleModaldelete{{ row.0 }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                          <div class="modal-content">
+                              <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Are you sure to delete this data?</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <form action="{{url_for('survey.Delsurvey')}}" method="post">
+                                  <div class="modal-body">
 
+                                      <div class="mb-3">
+                                          <input type="hidden" class="form-control" value="{{ row.0 }}" name="id">
+                                      </div>
+
+                                      <h3>You want to delete this data!!!!</h3>
+                                      <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                          <button type="submit" class="btn btn-primary">Delete it!</button>
+                                      </div>
+  
+                                  </div>
+
+
+                              </form>
+                              
+                          </div>
+                          </div>
+                        </div>
+                        
+                    
                     {%endfor%}
                   
                 </tbody>

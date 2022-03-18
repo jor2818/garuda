@@ -54,10 +54,10 @@ def Delsurvey():
 
         with con:
             cur = con.cursor()
-            sql = "DELETE FROM tb_member WHERE mem_id=%s"
+            sql = "DELETE FROM tb_survey WHERE srv_id=%s"
             cur.execute(sql, id)
             con.commit()
-            return redirect(url_for('member.Showdatasurvey'))
+            return redirect(url_for('survey.Showdatasurvey'))
 
 
 @survey.route('/addsurvey', methods=['POST'])
@@ -65,21 +65,30 @@ def Addsurvey():
     
     if request.method == 'POST':
         
-        fname = request.form['fname']
-        lname = request.form['lname']
-        username = request.form['username']
-        email = request.form['email']
-        password = request.form['password_1']
-        con_password = request.form['password_2']
+        projname = request.form['projname']
+        rname = request.form['rname']
+        stname = request.form['stname']
+        date = request.form['date']
+        username = session['username']
+        weather = request.form['weather']
+        trippurpose = request.form['trippurpose']
+        orgplc = request.form['orgplc']
+        orgplcname = request.form['orgplcname']
+        orgzone = request.form['orgzone']
+        destplc = request.form['destplc']
+        destplcname = request.form['destplcname']
+        destzone = request.form['destzone']
+        vehtype = request.form['vehtype']
+        nbpass = request.form['nbpass']
         
-        if password == con_password:
-            with con:
-                cur = con.cursor()
-                sql = "INSERT INTO tb_member (mem_fname, mem_lname, mem_username, mem_email, mem_password) VALUES (%s, %s, %s, %s, %s)"
-                cur.execute(sql,(fname,lname,username,email,password))
-                con.commit()
-                return redirect(url_for('member.Signin'))
-        else:
-            flash("Password are not matched.Try again!!!")
-            return redirect(url_for('member.Signup'))
+        with con:
+            cur = con.cursor()
+            sql = "INSERT INTO tb_survey (srv_projname, srv_rname, srv_stname, srv_date, srv_usrname, srv_weather, srv_trippurpose, srv_orgplc, srv_orgplcname, srv_orgzone, srv_destplc, srv_destplcname, srv_destzone, srv_vehtype, srv_nbpass) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            cur.execute(sql,(projname,rname,stname,date,username,weather,trippurpose,orgplc,orgplcname,orgzone,destplc,destplcname,destzone,vehtype,nbpass))
+            con.commit()
+            flash("This data has been stored already.")
+            return redirect(url_for('member.Surveyform'))
+
+        
+
 
