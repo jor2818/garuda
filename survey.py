@@ -1,8 +1,11 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 import pymysql
+import sqlalchemy as db
+import pandas as pd
 
 
 con = pymysql.connect("127.0.0.1","root","","garudadb")
+engine = db.create_engine('mysql+pymysql://root:@127.0.0.1/garudadb')
 survey = Blueprint('survey', __name__)
 
 
@@ -18,13 +21,20 @@ def Showdatasurvey():
         if session["status"] == 0:
             sql = "SELECT * FROM tb_survey WHERE srv_usrname=%s"
             cur.execute(sql, session['username'])
+            # SQL Database to DataFrame
+            df = pd.read_sql(sql,engine,params=[session['username']])
+            print(df)
         else:
             sql = "SELECT * FROM tb_survey"
             cur.execute(sql)
+            # SQL Database to DataFrame
+            df = pd.read_sql(sql,engine)
+            print(df)
+
         
         rows = cur.fetchall()
         print(rows)
-        return render_template('showdatasurvey.html', headername='ข้อมูลการสำรวจ',rows=rows)
+        return render_template('showdatasurvey.html', headername='ข้อมูลการสำรวจ',rows=rows,df=df)
 
 @survey.route('/editsurvey', methods=['POST'])
 def Editsurvey():
