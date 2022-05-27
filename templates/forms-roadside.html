@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Roadside Interview Form</title>
+
+	<!-- PICK ONE OF THE STYLES BELOW -->
+	<link href="static/css/modern.css" rel="stylesheet">
+	<!-- <link href="css/classic.css" rel="stylesheet"> -->
+	<!-- <link href="css/dark.css" rel="stylesheet"> -->
+	<!-- <link href="css/light.css" rel="stylesheet"> -->
+
+	<!-- BEGIN SETTINGS -->
+	<!-- You can remove this after picking a style -->
+	<script src="static/js/settings.js"></script>
+	<!-- END SETTINGS -->
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-120946860-7');
+	</script>
+
+</head>
+
+<body>
+	<div class="splash active">
+		<div class="splash-icon"></div>
+	</div>
+
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar">
+			<a class="sidebar-brand" href="index.html">
+				<svg>
+					<use xlink:href="#ion-ios-pulse-strong"></use>
+				</svg>
+				GARUDA
+			</a>
+			<div class="sidebar-content">
+				<div class="sidebar-user">
+					<img src="static/image/avatars/avatar.jpg" class="img-fluid rounded-circle mb-2" alt="Linda Miller" />
+					<div class="font-weight-bold">{{session['fname']}}</div>
+
+					{% if session['status'] == 0 %}
+						<small>user</small>
+					{% else %}
+						<small>Admin</small>
+					{% endif %}
+				</div>
+
+				<ul class="sidebar-nav">
+
+					<li class="sidebar-item">
+						<a href="#dashboards" data-toggle="collapse" class="sidebar-link">
+							<i class="align-middle mr-2 fas fa-fw fa-home"></i> <span class="align-middle">Dashboards</span>
+						</a>
+						<ul id="dashboards" class="sidebar-dropdown list-unstyled collapse show" data-parent="#sidebar">
+							<li class="sidebar-item"><a class="sidebar-link" href="{{url_for('survey.Rsanalysis')}}">Roadside Analytics</a></li>
+						</ul>
+					</li>
+
+					<li class="sidebar-item">
+						<a href="#tables" data-toggle="collapse" class="sidebar-link">
+							<i class="align-middle mr-2 fas fa-fw fa-table"></i> <span class="align-middle">Tables</span>
+						</a>
+						<ul id="tables" class="sidebar-dropdown list-unstyled collapse show" data-parent="#sidebar">
+
+							{% if session['status'] == 1 %}
+								<li class="sidebar-item"><a class="sidebar-link" href="{{url_for('member.Showdatamember')}}">Member</a></li>
+								<li class="sidebar-item"><a class="sidebar-link" href="{{url_for('survey.Showdatasurvey')}}">Roadside</a></li>
+							{% else %}
+								<li class="sidebar-item"><a class="sidebar-link" href="{{url_for('survey.Showdatasurvey')}}">Roadside</a></li>
+							{% endif %}
+						</ul>
+					</li>
+
+                    <li class="sidebar-item active">
+						<a href="#forms" data-toggle="collapse" class="sidebar-link">
+							<i class="align-middle mr-2 fas fa-fw fa-check-square"></i> <span class="align-middle">Forms</span>
+						</a>
+						<ul id="forms" class="sidebar-dropdown list-unstyled collapse show" data-parent="#sidebar">
+							<li class="sidebar-item active"><a class="sidebar-link" href="{{url_for('member.Surveyform')}}">Roadside</a></li>
+						</ul>
+					</li>
+
+					<li class="sidebar-item">
+						<a href="#system" data-toggle="collapse" class="sidebar-link collapsed">
+							<i class="align-middle mr-2 fas fa-fw fa-desktop"></i> <span class="align-middle">System</span>
+						</a>
+						<ul id="system" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+							<li class="sidebar-item"><a class="sidebar-link" href="#">Profile</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="{{url_for('member.Signoff')}}">Sign off</a></li>
+						</ul>
+					</li>
+
+				</ul>
+				
+			</div>
+		</nav>
+		<div class="main">
+
+			<nav class="navbar navbar-expand navbar-theme">
+				<a class="sidebar-toggle d-flex mr-2">
+					<i class="hamburger align-self-center"></i>
+				</a>
+			</nav>
+
+			<main class="content">
+				<div class="container-fluid">
+
+					<div class="header">
+						<h1 class="header-title">
+							Roadside
+						</h1>
+						<nav aria-label="breadcrumb">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="dashboard-default.html">Dashboard</a></li>
+								<li class="breadcrumb-item"><a href="#">Forms</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Roadside</li>
+							</ol>
+						</nav>
+					</div>
+
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for msg in messages %}
+                                <div class="alert alert-success alert-dismissible" role="alert">
+                                    
+                                    {{ msg }}
+
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                                    
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
+					<div class="row">
+						<div class="col-12 col-xxl-6">
+							<div id="smartwizard-default-primary" class="wizard wizard-primary mb-4">
+								<ul class="nav">
+									<li class="nav-item"><a class="nav-link" href="#default-primary-step-1">First Step<br /><small>Site description</small></a>
+									</li>
+									<li class="nav-item"><a class="nav-link" href="#default-primary-step-2">Second Step<br /><small>Trip description</small></a>
+									</li>
+									<li class="nav-item"><a class="nav-link" href="#default-primary-step-3">Third Step<br /><small>Vehicle description</small></a>
+									</li>
+									<li class="nav-item"><a class="nav-link" href="#default-primary-step-4">Fourth Step<br /><small>Driver description</small></a>
+									</li>
+								</ul>
+
+								<form action="{{ url_for('survey.Addsurvey') }}" method="post">
+									<div class="tab-content">
+										<div id="default-primary-step-1" class="tab-pane" role="tabpanel">
+
+											<div class="card">
+												<div class="card-header">
+													<h5 class="card-title">Site description</h5>
+													<h6 class="card-subtitle text-muted">Default Bootstrap form layout.</h6>
+												</div>
+												<div class="card-body">
+													
+													<div class="form-group">
+														<label for="projectname">Project Name :</label>
+                                						<input type="text" placeholder="project name" name="projname" class="form-control my-2 p-3" required>
+													</div>
+													<div class="form-group">
+														<label for="staname">Station Name :</label>
+                                						<input type="text" placeholder="station name" name="stname" class="form-control my-2 p-3" required>
+													</div>
+													<div class="form-group">
+														<label for="roadname">Road Name/Number :</label>
+                                						<input type="text" placeholder="road name" name="rname" class="form-control my-2 p-3">
+													</div>
+													<div class="form-group">
+														<label for="direction">Direction :</label>
+                                						<div class="form-check">
+															<input class="form-check-input" type="radio" name="direction" value="inbound" checked>
+															<label class="form-check-label">
+															  Inbound
+															</label>
+														</div>
+														<div class="form-check">
+															<input class="form-check-input" type="radio" name="direction" value="outbound">
+															<label class="form-check-label">
+															  Outbound
+															</label>
+														</div>
+													</div>
+													<div class="form-group">
+														<label for="date">Date :</label>
+                                						<input type="date" placeholder="date" name="date" class="form-control my-2 p-3" required>
+													</div>
+													<div class="form-group">
+														<label for="weather">Weather :</label><br>
+														<label class="form-check-inline">
+															<input class="form-check-input" type="radio" name="weather" value="sunny" checked>
+															<span class="form-check-label">
+																sunny
+															</span>
+														</label>
+														<label class="form-check form-check-inline">
+															<input class="form-check-input" type="radio" name="weather" value="bright">
+															<span class="form-check-label">
+																bright
+															</span>
+														</label>
+														<label class="form-check form-check-inline">
+															<input class="form-check-input" type="radio" name="weather" value="cloudy">
+															<span class="form-check-label">
+																cloudy
+															</span>
+														</label>
+														<label class="form-check form-check-inline">
+															<input class="form-check-input" type="radio" name="weather" value="drizzle">
+															<span class="form-check-label">
+																drizzle
+															</span>
+														</label>
+														<label class="form-check form-check-inline">
+															<input class="form-check-input" type="radio" name="weather" value="rain">
+															<span class="form-check-label">
+																rain
+															</span>
+														</label>
+														<label class="form-check form-check-inline">
+															<input class="form-check-input" type="radio" name="weather" value="pour">
+															<span class="form-check-label">
+																pour
+															</span>
+														</label>
+													</div>
+																							
+												</div>
+											</div>
+											
+										</div>
+										<div id="default-primary-step-2" class="tab-pane" role="tabpanel">
+											<div class="row">
+
+												<div class="col-12">
+
+
+													<div class="card">
+
+														<div class="card-header">
+															<h5 class="card-title">Trip purpose</h5>
+															<h6 class="card-subtitle text-muted">Default Bootstrap form layout.</h6>
+														</div>
+
+
+														<div class="card-body">
+															
+															<div class="form-check">
+																<input class="form-check-input" type="radio" name="trippurpose" value="1" checked>
+																<label class="form-check-label">
+																Back Home
+																</label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio" name="trippurpose" value="2">
+																<label class="form-check-label">
+																Go Work
+																</label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio" name="trippurpose" value="3">
+																<label class="form-check-label">
+																Study
+																</label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio" name="trippurpose" value="4">
+																<label class="form-check-label">
+																Business Affairs
+																</label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio" name="trippurpose" value="5">
+																<label class="form-check-label">
+																Take Children to School
+																</label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio" name="trippurpose" value="6">
+																<label class="form-check-label">
+																Shopping/Restaurant/Recreation
+																</label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio" name="trippurpose" value="7">
+																<label class="form-check-label">
+																Other
+																</label>
+															</div>
+													
+															
+														</div>
+													</div>
+												</div>
+												
+											</div>
+
+											<div class="row">
+
+												<div class="col-12 col-lg-6">
+
+
+													<div class="card">
+														<div class="card-header">
+															<h5 class="card-title">Trip Origin</h5>
+															<h6 class="card-subtitle text-muted">Default Bootstrap form layout.</h6>
+														</div>
+														<div class="card-body">
+
+															<div class="form-group">
+																<label>Province Name :</label>
+																<input type="text" placeholder="Province" name="orgprovince" class="form-control my-2 p-3">
+															</div>
+
+															<div class="form-group">
+																<label>Amphoe Name :</label>
+																<input type="text" placeholder="Amphoe" name="orgamphoe" class="form-control my-2 p-3">
+															</div>
+
+															<div class="form-group">
+																<label>Tambon Name :</label>
+																<input type="text" placeholder="Tambon" name="orgtambon" class="form-control my-2 p-3">
+															</div>
+
+															<div class="form-group">
+																<label>Origin Place Name (Landmark) :</label>
+																<input type="text" placeholder="Origin Place name" name="orgplcname" class="form-control my-2 p-3">
+															</div>
+
+															<div class="form-group">
+																<label>Zone No. :</label>
+																<input type="text" placeholder="Zone no." name="orgzone" class="form-control my-2 p-3" required>
+															</div>
+															
+
+
+														</div>
+													</div>
+												</div>
+												
+												<div class="col-12 col-lg-6">
+
+													<div class="card">
+														<div class="card-header">
+															<h5 class="card-title">Trip Destination</h5>
+															<h6 class="card-subtitle text-muted">Default Bootstrap form layout.</h6>
+														</div>
+														<div class="card-body">
+
+															<div class="form-group">
+																<label>Province Name :</label>
+																<input type="text" placeholder="Province" name="destprovince" class="form-control my-2 p-3">
+															</div>
+
+															<div class="form-group">
+																<label>Amphoe Name :</label>
+																<input type="text" placeholder="Amphoe" name="destamphoe" class="form-control my-2 p-3">
+															</div>
+
+															<div class="form-group">
+																<label>Tambon Name :</label>
+																<input type="text" placeholder="Tambon" name="desttambon" class="form-control my-2 p-3">
+															</div>
+
+															<div class="form-group">
+																<label>Destination Place Name (Landmark) :</label>
+																<input type="text" placeholder="Origin Place name" name="destplcname" class="form-control my-2 p-3">
+															</div>
+
+															<div class="form-group">
+																<label>Zone No. :</label>
+																<input type="text" placeholder="Zone no." name="destzone" class="form-control my-2 p-3" required>
+															</div>
+															
+
+
+														</div>
+													</div>
+												</div>
+												
+
+											</div>
+											
+											
+										</div>
+										<div id="default-primary-step-3" class="tab-pane" role="tabpanel">
+											
+											<div class="card">
+												<div class="card-header">
+													<h5 class="card-title">Vehicle description</h5>
+													<h6 class="card-subtitle text-muted">Default Bootstrap form layout.</h6>
+												</div>
+												<div class="card-body">
+													
+													<div class="form-group">
+														<label for="projectname">License Plate No :</label>
+                                						<input type="text" placeholder="License Plate" name="license" class="form-control my-2 p-3">
+													</div>
+													
+													
+																							
+												</div>
+											</div>
+
+											<div class="card">
+												<div class="card-header">
+													<h5 class="card-title">Type of Vehicle</h5>
+													<h6 class="card-subtitle text-muted">Default Bootstrap form layout.</h6>
+												</div>
+												<div class="card-body">
+
+													<div class="form-group">
+														
+														<div>
+
+															<label class="form-check form-check-inline">
+																<input class="form-check-input" type="radio" name="vehtype" value="1" checked>
+																<span class="form-check-label">
+																	Bicycle/motorcycle/tricycle
+																</span>
+															</label>
+															<label class="form-check form-check-inline">
+																<input class="form-check-input" type="radio" name="vehtype" value="2">
+																<span class="form-check-label">
+																	Car/SUV
+																</span>
+															</label>
+															<label class="form-check form-check-inline">
+																<input class="form-check-input" type="radio" name="vehtype" value="3">
+																<span class="form-check-label">
+																	Pickup/Van
+																</span>
+															</label>
+
+															<div class="form-group row">
+																<label class="col-form-label col-sm-3 text-sm-left">No. of Passengers</label>
+																<div>
+																	<input type="text" class="form-control" name="nbpass" class="form-control my-2 p-3">
+																</div>
+															</div>
+
+
+
+														</div>
+														<br>
+														<div>
+
+															<label class="form-check form-check-inline">
+																<input class="form-check-input" type="radio" name="vehtype" value="4">
+																<span class="form-check-label">
+																	Minibus/Medium Bus/Heavy Bus
+																</span>
+															</label>
+															<div>
+																<label class="col-form-label col-sm-3 text-sm-left">No. of Passengers :</label>
+																<select class="custom-select mb-3" name="nbpassbus">
+																	<option selected>Open this select menu</option>
+																	<option value="1">Vacant</option>
+																	<option value="2">1/4</option>
+																	<option value="3">1/2</option>
+																	<option value="4">3/4</option>
+																	<option value="5">Full</option>
+																</select>
+															</div>
+
+														</div>
+														<br>
+														<div>
+
+															<label class="form-check form-check-inline">
+																<input class="form-check-input" type="radio" name="vehtype" value="5">
+																<span class="form-check-label">
+																	Small Truck/Truck_4W
+																</span>
+															</label>
+															<label class="form-check form-check-inline">
+																<input class="form-check-input" type="radio" name="vehtype" value="6">
+																<span class="form-check-label">
+																	Medium Truck/Truck_6W
+																</span>
+															</label>
+															<label class="form-check form-check-inline">
+																<input class="form-check-input" type="radio" name="vehtype" value="7">
+																<span class="form-check-label">
+																	Heavy Truck/Truck_10W
+																</span>
+															</label>
+															<label class="form-check form-check-inline">
+																<input class="form-check-input" type="radio" name="vehtype" value="8">
+																<span class="form-check-label">
+																	Trailer
+																</span>
+															</label>
+
+															<div>
+																<label class="col-form-label col-sm-3 text-sm-left">Type of Goods :</label>
+																<select class="custom-select mb-3" name="goodstype">
+																	<option selected>Open this select menu</option>
+																	<option value="1">Vacant</option>
+																	<option value="2">agricultural products</option>
+																	<option value="3">Construction materials and equipment</option>
+																	<option value="4">Industrial and processed products</option>
+																	<option value="5">Other</option>
+																</select>
+															</div>
+
+															<div>
+																<label class="col-form-label col-sm-3 text-sm-left">Goods Weight :</label>
+																<select class="custom-select mb-3" name="goodsweight">
+																	<option selected>Open this select menu</option>
+																	<option value="1">Vacant</option>
+																	<option value="2">1/4</option>
+																	<option value="3">1/2</option>
+																	<option value="4">3/4</option>
+																	<option value="5">Full</option>
+																</select>
+															</div>
+
+														</div>
+														
+														
+														
+													</div>
+
+												</div>
+
+											</div>
+
+
+
+										</div>
+										<div id="default-primary-step-4" class="tab-pane" role="tabpanel">
+											<div class="card">
+												<div class="card-header">
+													<h5 class="card-title">Driver description</h5>
+													<h6 class="card-subtitle text-muted">Default Bootstrap form layout.</h6>
+												</div>
+												<div class="card-body">
+													
+												
+													<div class="form-group">
+														<label for="direction">Income Level :</label>
+                                						<div class="form-check">
+															<input class="form-check-input" type="radio" name="income" value="1" checked>
+															<label class="form-check-label">
+															  No income
+															</label>
+														</div>
+														<div class="form-check">
+															<input class="form-check-input" type="radio" name="income" value="2">
+															<label class="form-check-label">
+															  less than 3,000 baht
+															</label>
+														</div>
+														<div class="form-check">
+															<input class="form-check-input" type="radio" name="income" value="3">
+															<label class="form-check-label">
+															  3,000 - 8,999 baht
+															</label>
+														</div>
+														<div class="form-check">
+															<input class="form-check-input" type="radio" name="income" value="4">
+															<label class="form-check-label">
+															  9,000 - 14,999 baht
+															</label>
+														</div>
+														<div class="form-check">
+															<input class="form-check-input" type="radio" name="income" value="5">
+															<label class="form-check-label">
+															  15,000 - 24,999 baht
+															</label>
+														</div>
+														<div class="form-check">
+															<input class="form-check-input" type="radio" name="income" value="6">
+															<label class="form-check-label">
+															  25,000 - 49,999 baht
+															</label>
+														</div>
+														<div class="form-check">
+															<input class="form-check-input" type="radio" name="income" value="7">
+															<label class="form-check-label">
+															  50,000 - 80,000 baht
+															</label>
+														</div>
+														<div class="form-check">
+															<input class="form-check-input" type="radio" name="income" value="8">
+															<label class="form-check-label">
+															  more than 80,000 baht
+															</label>
+														</div>
+													</div>
+																								
+												</div>
+											</div>
+										</div>
+
+										
+									</div>
+
+									<div class="row">
+
+										<div class="col-12">
+
+											<div class="card">
+
+												<div class="form-group row">
+													<div class="col-sm-10 ml-sm-auto">
+														<button type="submit" class="btn btn-secondary">Store Data</button>
+													</div>
+												</div>
+											</div>
+										</div>
+
+											
+									</div>
+									
+									
+
+								</form>
+								
+							</div>
+							
+							
+						</div>
+
+
+						
+					</div>
+
+				</div>
+			</main>
+			
+
+
+
+
+
+
+
+			<footer class="footer">
+				<div class="container-fluid">
+					<div class="row text-muted">
+						<div class="col-8 text-left">
+							<ul class="list-inline">
+								<li class="list-inline-item">
+									<a class="text-muted" href="#">Support</a>
+								</li>
+								<li class="list-inline-item">
+									<a class="text-muted" href="#">Privacy</a>
+								</li>
+								<li class="list-inline-item">
+									<a class="text-muted" href="#">Terms of Service</a>
+								</li>
+								<li class="list-inline-item">
+									<a class="text-muted" href="#">Contact</a>
+								</li>
+							</ul>
+						</div>
+						<div class="col-4 text-right">
+							<p class="mb-0">
+								&copy; 2022 - <a href="dashboard-default.html" class="text-muted">GARUDA</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+
+	</div>
+
+	<svg width="0" height="0" style="position:absolute">
+		<defs>
+			<symbol viewBox="0 0 512 512" id="ion-ios-pulse-strong">
+				<path
+					d="M448 273.001c-21.27 0-39.296 13.999-45.596 32.999h-38.857l-28.361-85.417a15.999 15.999 0 0 0-15.183-10.956c-.112 0-.224 0-.335.004a15.997 15.997 0 0 0-15.049 11.588l-44.484 155.262-52.353-314.108C206.535 54.893 200.333 48 192 48s-13.693 5.776-15.525 13.135L115.496 306H16v31.999h112c7.348 0 13.75-5.003 15.525-12.134l45.368-182.177 51.324 307.94c1.229 7.377 7.397 11.92 14.864 12.344.308.018.614.028.919.028 7.097 0 13.406-3.701 15.381-10.594l49.744-173.617 15.689 47.252A16.001 16.001 0 0 0 352 337.999h51.108C409.973 355.999 427.477 369 448 369c26.511 0 48-22.492 48-49 0-26.509-21.489-46.999-48-46.999z">
+				</path>
+			</symbol>
+		</defs>
+	</svg>
+	<script src="static/js/app.js"></script>
+
+    <script>
+		$(function() {
+			$("#smartwizard-default-primary").smartWizard({
+				theme: "default",
+				showStepURLhash: false
+			});
+			$("#smartwizard-default-success").smartWizard({
+				theme: "default",
+				showStepURLhash: false
+			});
+			$("#smartwizard-default-danger").smartWizard({
+				theme: "default",
+				showStepURLhash: false
+			});
+			$("#smartwizard-default-warning").smartWizard({
+				theme: "default",
+				showStepURLhash: false
+			});
+			$("#smartwizard-arrows-primary").smartWizard({
+				theme: "arrows",
+				showStepURLhash: false
+			});
+			$("#smartwizard-arrows-success").smartWizard({
+				theme: "arrows",
+				showStepURLhash: false
+			});
+			$("#smartwizard-arrows-danger").smartWizard({
+				theme: "arrows",
+				showStepURLhash: false
+			});
+			$("#smartwizard-arrows-warning").smartWizard({
+				theme: "arrows",
+				showStepURLhash: false
+			});
+			// Validation
+			var $validationForm = $("#smartwizard-validation");
+			$validationForm.validate({
+				errorPlacement: function errorPlacement(error, element) {
+					$(element).parents(".error-placeholder").append(
+						error.addClass("invalid-feedback small d-block")
+					)
+				},
+				highlight: function(element) {
+					$(element).addClass("is-invalid");
+				},
+				unhighlight: function(element) {
+					$(element).removeClass("is-invalid");
+				},
+				rules: {
+					"wizard-confirm": {
+						equalTo: "input[name=\"wizard-password\"]"
+					}
+				}
+			});
+			$validationForm
+				.smartWizard({
+					autoAdjustHeight: false,
+					backButtonSupport: false,
+					useURLhash: false,
+					showStepURLhash: false,
+					toolbarSettings: {
+						toolbarExtraButtons: [$("<button class=\"btn btn-submit btn-primary\" type=\"button\">Finish</button>")]
+					}
+				})
+				.on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
+					if (stepDirection === 1) {
+						return $validationForm.valid();
+					}
+					return true;
+				});
+			$validationForm.find(".btn-submit").on("click", function() {
+				if (!$validationForm.valid()) {
+					return;
+				}
+				alert("Great! The form is valid and ready to submit.");
+				return false;
+			});
+		});
+	</script>
+
+</body>
+
+
+<!-- Mirrored from spark.bootlab.io/tables-bootstrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Apr 2021 05:22:21 GMT -->
+</html>

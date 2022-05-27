@@ -18,7 +18,7 @@ def Showdatamember():
         cur.execute(sql)
         rows = cur.fetchall()
         print(rows)
-        return render_template('showdatamember.html', headername='ข้อมูลสมาชิก',rows=rows)
+        return render_template('tables-member.html', rows=rows)
 
 @member.route('/editmember', methods=['POST'])
 def Editmember():
@@ -56,7 +56,7 @@ def Delmember():
 
 @member.route('/signup')
 def Signup():
-    return render_template('signup.html')
+    return render_template('pages-sign-up.html')
 
 @member.route('/addmember', methods=['POST'])
 def Addmember():
@@ -83,11 +83,11 @@ def Addmember():
 
 @member.route('/signin')
 def Signin():
-    return render_template('signin.html')
+    return render_template('pages-sign-in.html')
 
 @member.route('/surveyform')
 def Surveyform():
-    return render_template('surveyform.html')
+    return render_template('forms-roadside.html')
 
 @member.route('/checklogin', methods=['POST'])
 def Checklogin():
@@ -118,7 +118,7 @@ def Checklogin():
                     return redirect(url_for('member.Showdatamember'))
             else:
                 flash("You are not logged in. Please Check your username and password.")
-                return render_template('signin.html')
+                return render_template('pages-sign-in.html')
             
 @member.route('/signoff')
 def Signoff():
