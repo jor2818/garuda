@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
+from werkzeug.security import generate_password_hash, check_password_hash
 import pymysql
 
 
@@ -70,16 +71,32 @@ def Addmember():
         password = request.form['password_1']
         con_password = request.form['password_2']
         
-        if password == con_password:
+        if len(fname)<2:
+            flash("Firstname should be greater than 2 characters.Try again!!!")
+            
+        elif len(lname)<2:
+            flash("Lastname should be greater than 2 characters.Try again!!!")
+
+        elif len(username)<2:
+            flash("Username should be greater than 2 characters.Try again!!!")
+
+        elif len(email)<7:
+            flash("Email should be at least 7 characters.Try again!!!")
+        
+        elif password != con_password:
+            flash("Password are not matched.Try again!!!")
+            
+        else:
+            # generate hash password
+            password = generate_password_hash(password)
             with con:
                 cur = con.cursor()
                 sql = "INSERT INTO tb_member (mem_fname, mem_lname, mem_username, mem_email, mem_password) VALUES (%s, %s, %s, %s, %s)"
                 cur.execute(sql,(fname,lname,username,email,password))
                 con.commit()
                 return redirect(url_for('member.Signin'))
-        else:
-            flash("Password are not matched.Try again!!!")
-            return redirect(url_for('member.Signup'))
+
+    return redirect(url_for('member.Signup'))
 
 @member.route('/signin')
 def Signin():
@@ -96,6 +113,9 @@ def Checklogin():
         username = request.form['username']
         password = request.form['password']
         
+        # regenerate hash password
+        password = check_password_hash(username, password)
+        
         with con:
             cur = con.cursor()
             sql = "SELECT * FROM tb_member WHERE mem_username=%s AND mem_password=%s"
@@ -103,6 +123,8 @@ def Checklogin():
             rows = cur.fetchall()
             print(rows)
             
+            
+            # Check status Admin or user
             if len(rows)>0:
                 if rows[0][6] == 0:
                     session['username'] = username
