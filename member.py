@@ -1,11 +1,12 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
-from werkzeug.security import generate_password_hash, check_password_hash
+from flask_bcrypt import Bcrypt
 import pymysql
 
 
 con = pymysql.connect("127.0.0.1","root","","garudadb")
 member = Blueprint('member', __name__)
 
+bcrypt = Bcrypt()
 
 
 @member.route('/showmember')
@@ -88,7 +89,7 @@ def Addmember():
             
         else:
             # generate hash password
-            password = generate_password_hash(password)
+            password = bcrypt.generate_password_hash(password)
             with con:
                 cur = con.cursor()
                 sql = "INSERT INTO tb_member (mem_fname, mem_lname, mem_username, mem_email, mem_password) VALUES (%s, %s, %s, %s, %s)"
@@ -106,41 +107,41 @@ def Signin():
 def Surveyform():
     return render_template('forms-roadside.html')
 
-@member.route('/checklogin', methods=['POST'])
+@member.route('/checklogin', methods=['POST','GET'])
 def Checklogin():
     
     if request.method == 'POST':
         username = request.form['username']
-        password = request.form['password']
-        
-        # regenerate hash password
-        password = check_password_hash(username, password)
+        password1 = request.form['password']
         
         with con:
             cur = con.cursor()
-            sql = "SELECT * FROM tb_member WHERE mem_username=%s AND mem_password=%s"
-            cur.execute(sql,(username,password))
+            sql = "SELECT * FROM tb_member WHERE mem_username=%s"
+            cur.execute(sql,username)
             rows = cur.fetchall()
-            print(rows)
-            
-            
+            print(rows[0][5])
+            print(password1)
             # Check status Admin or user
             if len(rows)>0:
-                if rows[0][6] == 0:
-                    session['username'] = username
-                    session['fname'] = rows[0][1]
-                    session['status'] = rows[0][6]
-                    session.permanent = True
-                    return redirect(url_for('member.Surveyform'))
+                if bcrypt.check_password_hash(rows[0][5], password1):# Why False!
+                    if rows[0][6] == 0:
+                        session['username'] = username
+                        session['fname'] = rows[0][1]
+                        session['status'] = rows[0][6]
+                        session.permanent = True
+                        return redirect(url_for('member.Surveyform'))
+                    else:
+                        session['username'] = username
+                        session['fname'] = rows[0][1]
+                        session['status'] = rows[0][6]
+                        session.permanent = True
+                        return redirect(url_for('member.Showdatamember'))
                 else:
-                    session['username'] = username
-                    session['fname'] = rows[0][1]
-                    session['status'] = rows[0][6]
-                    session.permanent = True
-                    return redirect(url_for('member.Showdatamember'))
+                    flash("Incorrect Password! Please Check your password again.")
+
             else:
                 flash("You are not logged in. Please Check your username and password.")
-                return render_template('pages-sign-in.html')
+            return render_template('pages-sign-in.html')
             
 @member.route('/signoff')
 def Signoff():
