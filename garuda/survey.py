@@ -38,7 +38,7 @@ def Showdatasurvey():
         print(df)
         return render_template('tables-roadside.html',rows=rows,df=df)
 
-@survey.route('/editsurvey', methods=['POST'])
+@survey.route('/editsurvey', methods=['GET','POST'])
 def Editsurvey():
     if request.method == 'POST':
         
@@ -59,7 +59,7 @@ def Editsurvey():
 
      
 
-@survey.route('/delsurvey', methods=['POST'])   
+@survey.route('/delsurvey', methods=['GET','POST'])   
 def Delsurvey():
     if request.method == 'POST':
         
@@ -73,7 +73,7 @@ def Delsurvey():
             return redirect(url_for('survey.Showdatasurvey'))
 
 
-@survey.route('/addsurvey', methods=['POST'])
+@survey.route('/addsurvey', methods=['GET','POST'])
 def Addsurvey():
     
     if request.method == 'POST':

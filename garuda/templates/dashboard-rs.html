@@ -10,14 +10,14 @@
 	<title>Roadside Analysis</title>
 
 	<!-- PICK ONE OF THE STYLES BELOW -->
-	<link href="static/css/modern.css" rel="stylesheet">
+	<link href="../static/css/modern.css" rel="stylesheet">
 	<!-- <link href="css/classic.css" rel="stylesheet"> -->
 	<!-- <link href="css/dark.css" rel="stylesheet"> -->
 	<!-- <link href="css/light.css" rel="stylesheet"> -->
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js" integrity="sha256-cHVO4dqZfamRhWD7s4iXyaXWVK10odD+qp4xidFzqTI=" crossorigin="anonymous"></script>
 	<!-- BEGIN SETTINGS -->
 	<!-- You can remove this after picking a style -->
-	<script src="static/js/settings.js"></script>
+	<script src="../static/js/settings.js"></script>
 	<!-- END SETTINGS -->
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
@@ -46,7 +46,7 @@
 			</a>
 			<div class="sidebar-content">
 				<div class="sidebar-user">
-					<img src="static/image/avatars/avatar.jpg" class="img-fluid rounded-circle mb-2" alt="Linda Miller" />
+					<img src="../static/image/avatars/default.jpg" class="img-fluid rounded-circle mb-2" alt="Linda Miller" />
 					<div class="font-weight-bold">{{session['fname']}}</div>
 
 					{% if session['status'] == 0 %}
@@ -359,7 +359,7 @@
 			</symbol>
 		</defs>
 	</svg>
-	<script src="static/js/app.js"></script>
+	<script src="../static/js/app.js"></script>
 	<script>
 		const ctx1 = document.getElementById('triptype').getContext('2d');
 		const myChart1 = new Chart(ctx1, {

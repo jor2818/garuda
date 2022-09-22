@@ -22,7 +22,7 @@ def Showdatamember():
         print(rows)
         return render_template('tables-member.html', rows=rows)
 
-@member.route('/editmember', methods=['POST'])
+@member.route('/editmember', methods=['GET','POST'])
 def Editmember():
     if request.method == 'POST':
         
@@ -42,7 +42,7 @@ def Editmember():
             return redirect(url_for('member.Showdatamember'))
         
 
-@member.route('/delmember', methods=['POST'])   
+@member.route('/delmember', methods=['GET','POST'])   
 def Delmember():
     if request.method == 'POST':
         
@@ -60,7 +60,7 @@ def Delmember():
 def Signup():
     return render_template('pages-sign-up.html')
 
-@member.route('/addmember', methods=['POST'])
+@member.route('/addmember', methods=['GET','POST'])
 def Addmember():
     
     if request.method == 'POST':
@@ -119,8 +119,8 @@ def Checklogin():
             sql = "SELECT * FROM tb_member WHERE mem_username=%s"
             cur.execute(sql,username)
             rows = cur.fetchall()
-            print(rows[0][5])
-            print(password1)
+            #print(rows[0][5])
+            #print(password1)
             # Check status Admin or user
             if len(rows)>0:
                 if bcrypt.check_password_hash(rows[0][5], password1):# Why False!
